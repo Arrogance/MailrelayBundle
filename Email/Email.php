@@ -249,7 +249,7 @@ class Email
      */
     public function toArray()
     {
-        return [
+        $array = [
             'emails' => $this->emailCollection,
             'subject' => $this->subject,
             'html' => $this->html,
@@ -258,5 +258,11 @@ class Email
             'mailboxReportId' => $this->reportId,
             'packageId' => $this->packageId
         ];
+
+        if($this->attachments) {
+            $array['attachments'] = $this->attachments;
+        }
+
+        return $array;
     }
 }
