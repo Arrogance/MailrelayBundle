@@ -18,7 +18,7 @@ use Arrogance\MailrelayBundle\Connection\Connection;
  * @package Arrogance\MailrelayBundle\Client
  * @author Manuel Raya <manuel@arrogance.es>
  */
-class Client
+class Client extends ClientMethods
 {
     /**
      * @var string
@@ -29,11 +29,6 @@ class Client
      * @var string
      */
     protected $apiKey;
-
-    /**
-     * @var Connection
-     */
-    private $connection;
 
     /**
      * Client constructor.

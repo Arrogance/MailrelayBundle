@@ -10,6 +10,7 @@
  */
 
 namespace Arrogance\MailrelayBundle\Connection;
+use Arrogance\MailrelayBundle\Client\Client;
 
 /**
  * Interface ConnectionInterface
@@ -19,5 +20,6 @@ namespace Arrogance\MailrelayBundle\Connection;
  */
 interface ConnectionInterface
 {
-
+    public function __construct(Client $client);
+    public function get($apiMethod, array $config);
 }
