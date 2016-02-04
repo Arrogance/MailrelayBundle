@@ -14,7 +14,7 @@ namespace Arrogance\MailrelayBundle\Email;
 /**
  * Class Email
  *
- * @package Arrogance\MailrelayBundle\Client
+ * @package Arrogance\MailrelayBundle\Email
  * @author Manuel Raya <manuel@arrogance.es>
  */
 class Email
