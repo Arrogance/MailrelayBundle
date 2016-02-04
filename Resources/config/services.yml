@@ -1,0 +1,7 @@
+services:
+    arrogance_mailrelay.client:
+        class: Arrogance\MailrelayBundle\Client\Client
+        arguments:
+            - "%arrogance_mailrelay.api_key%"
+            - "%arrogance_mailrelay.access_point%"
+            - "%arrogance_mailrelay.mailrelay_api%"
