@@ -22,7 +22,7 @@ class Email
     /**
      * @var array
      */
-    protected $emails;
+    protected $emailCollection;
 
     /**
      * @var string
@@ -65,16 +65,18 @@ class Email
      */
     public function __construct()
     {
-        $this->emails = [];
+        $this->emailCollection = [];
     }
 
     /**
-     * @param $name
-     * @param $email
+     * @param string $name
+     * @param string $email
+     *
+     * @return $this
      */
     public function addEmail($name, $email)
     {
-        $this->emails[] = [
+        $this->emailCollection[] = [
             'name' => $name,
             'email' => $email
         ];
@@ -87,7 +89,7 @@ class Email
      */
     public function getEmails()
     {
-        return $this->emails;
+        return $this->emailCollection;
     }
 
     /**
@@ -97,7 +99,7 @@ class Email
      */
     public function setEmails($emails)
     {
-        $this->emails = $emails;
+        $this->emailCollection = $emails;
 
         return $this;
     }
@@ -248,7 +250,7 @@ class Email
     public function toArray()
     {
         return [
-            'emails' => $this->emails,
+            'emails' => $this->emailCollection,
             'subject' => $this->subject,
             'html' => $this->html,
             'mailboxFromId' => $this->fromId,
