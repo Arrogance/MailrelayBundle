@@ -10,6 +10,7 @@
  */
 
 namespace Arrogance\MailrelayBundle\Email;
+use Arrogance\MailrelayBundle\ApiMethodInterface;
 
 /**
  * Class Email
@@ -17,44 +18,63 @@ namespace Arrogance\MailrelayBundle\Email;
  * @package Arrogance\MailrelayBundle\Email
  * @author Manuel Raya <manuel@arrogance.es>
  */
-class Email
+class Email implements ApiMethodInterface
 {
     /**
+     * Array with all recipients in the following format:
+     *  array( 'name' => 'Name 1', 'email' => '' ),
+     *  array( 'name' => 'Name 1', 'email' => '' )
+     *
      * @var array
      */
     protected $emailCollection;
 
     /**
+     * Subject of the message.
+     *
      * @var string
      */
     protected $subject;
 
     /**
+     * Html of the message. There is no need to provide plain text as it is automatically generated based on the
+     * provided html.
+     *
      * @var string
      */
     protected $html;
 
     /**
+     * Id of the mailbox that will be used on the From header. You can get all mailboxes using function.
+     *
      * @var integer
      */
     protected $fromId;
 
     /**
+     * Id of the mailbox that will be used on the Reply-To header. You can get all mailboxes using function.
+     *
      * @var integer
      */
     protected $replyId;
 
     /**
+     * Mailbox report id. You can get all mailboxes using function.
+     *
      * @var integer
      */
     protected $reportId;
 
     /**
+     * Id of the package used to send this email. You can get all packages using function.
+     *
      * @var integer
      */
     protected $packageId;
 
     /**
+     * Optional parameter in case you want to add attachments.
+     *
      * @var mixed
      * @TODO Manuel: I don't know how to manage attachments yet.
      */
