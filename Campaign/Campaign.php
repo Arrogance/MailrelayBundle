@@ -10,7 +10,8 @@
  */
 
 namespace Arrogance\MailrelayBundle\Campaign;
-use Arrogance\MailrelayBundle\Email\Email;
+
+use Arrogance\MailrelayBundle\Email\EmailBase;
 
 /**
  * Class Campaign
@@ -18,7 +19,7 @@ use Arrogance\MailrelayBundle\Email\Email;
  * @package Arrogance\MailrelayBundle\Campaign
  * @author Manuel Raya <manuel@arrogance.es>
  */
-class Campaign extends Email
+class Campaign extends EmailBase
 {
     /**
      * Array containing groups id for this campaign. Example for groups 1 and 7: array( 1, 7 ).
@@ -55,6 +56,36 @@ class Campaign extends Email
      * @var string
      */
     protected $analyticsUtmCampaign;
+
+    /**
+     * @var \DateTime
+     */
+    protected $date;
+
+    /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $lastSent;
+
+    /**
+     * @var boolean
+     */
+    protected $deleted;
+
+    /**
+     * @var \DateTime
+     */
+    protected $sendDate;
+
+    /**
+     * @var integer
+     */
+    protected $subscribersTotal;
 
     /**
      * Email constructor.
@@ -174,6 +205,126 @@ class Campaign extends Email
     public function setAnalyticsUtmCampaign($analyticsUtmCampaign)
     {
         $this->analyticsUtmCampaign = $analyticsUtmCampaign;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return Campaign
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     *
+     * @return Campaign
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastSent()
+    {
+        return $this->lastSent;
+    }
+
+    /**
+     * @param \DateTime $lastSent
+     *
+     * @return Campaign
+     */
+    public function setLastSent($lastSent)
+    {
+        $this->lastSent = $lastSent;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * @param boolean $deleted
+     *
+     * @return Campaign
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getSendDate()
+    {
+        return $this->sendDate;
+    }
+
+    /**
+     * @param \DateTime $sendDate
+     *
+     * @return Campaign
+     */
+    public function setSendDate($sendDate)
+    {
+        $this->sendDate = $sendDate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSubscribersTotal()
+    {
+        return $this->subscribersTotal;
+    }
+
+    /**
+     * @param int $subscribersTotal
+     *
+     * @return Campaign
+     */
+    public function setSubscribersTotal($subscribersTotal)
+    {
+        $this->subscribersTotal = $subscribersTotal;
 
         return $this;
     }

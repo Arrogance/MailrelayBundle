@@ -43,7 +43,7 @@ class Group implements ApiMethodInterface
     /**
      * @var boolean
      */
-    protected $enabled;
+    protected $enable;
 
     /**
      * @var boolean
@@ -55,7 +55,7 @@ class Group implements ApiMethodInterface
      */
     public function __construct()
     {
-        $this->enabled = true;
+        $this->enable = true;
         $this->visible = true;
     }
 
@@ -144,17 +144,17 @@ class Group implements ApiMethodInterface
      */
     public function isEnabled()
     {
-        return $this->enabled;
+        return $this->enable;
     }
 
     /**
-     * @param boolean $enabled
+     * @param boolean $enable
      *
      * @return Group
      */
-    public function setEnabled($enabled)
+    public function setEnable($enable)
     {
-        $this->enabled = $enabled;
+        $this->enable = $enable;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class Group implements ApiMethodInterface
             'name' => $this->name,
             'description' => $this->description,
             'position' => $this->position,
-            'enabled' => $this->enabled,
+            'enable' => $this->enable,
             'visible' => $this->visible
         ];
     }
