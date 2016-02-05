@@ -15,6 +15,7 @@ use Arrogance\MailrelayBundle\Campaign\Campaign;
 use Arrogance\MailrelayBundle\Campaign\CampaignFolder;
 use Arrogance\MailrelayBundle\Connection\Connection;
 use Arrogance\MailrelayBundle\Email\Email;
+use Arrogance\MailrelayBundle\Group\Group;
 
 /**
  * Class ClientMethods
@@ -188,11 +189,35 @@ abstract class ClientMethods
      *
      * @param integer $id
      *
-     * @return mixed
+     * @return object The response
      */
     public function deleteCampaignFolder($id)
     {
         return $this->connection->get('deleteCampaignFolder', [ 'id' => $id ]);
+    }
+
+    /**
+     * Get list of groups.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getGroups(array $options = [])
+    {
+        return $this->connection->get('getGroups', $options);
+    }
+
+    /**
+     * Add a new group.
+     *
+     * @param Group $group
+     *
+     * @return object The response
+     */
+    public function addGroup(Group $group)
+    {
+        return $this->connection->get('addGroup', $group->toArray());
     }
 
     /**
