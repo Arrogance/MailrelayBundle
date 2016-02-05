@@ -40,7 +40,7 @@ class Campaign extends Email
      *
      * @var integer
      */
-    protected $campaignId;
+    protected $campaignFolderId;
 
     /**
      * Add tokens to all tracked urls. If not set, it will be false.
@@ -121,19 +121,19 @@ class Campaign extends Email
     /**
      * @return int
      */
-    public function getCampaignId()
+    public function getCampaignFolderId()
     {
-        return $this->campaignId;
+        return $this->campaignFolderId;
     }
 
     /**
-     * @param int $campaignId
+     * @param int $campaignFolderId
      *
      * @return Campaign
      */
-    public function setCampaignId($campaignId)
+    public function setCampaignFolderId($campaignFolderId)
     {
-        $this->campaignId = $campaignId;
+        $this->campaignFolderId = $campaignFolderId;
 
         return $this;
     }
@@ -198,7 +198,7 @@ class Campaign extends Email
         $optional = [
             'attachments' => $this->attachments,
             'text' => $this->text,
-            'campaignId' => $this->campaignId,
+            'campaignFolderId' => $this->campaignFolderId,
             'analyticsUtmCampaign' => $this->analyticsUtmCampaign
         ];
 

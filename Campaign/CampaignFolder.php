@@ -21,9 +21,34 @@ use Arrogance\MailrelayBundle\ApiMethodInterface;
 class CampaignFolder implements ApiMethodInterface
 {
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
      * @var string
      */
     protected $name;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * @return string

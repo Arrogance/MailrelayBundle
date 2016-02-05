@@ -21,6 +21,11 @@ use Arrogance\MailrelayBundle\ApiMethodInterface;
 class Email implements ApiMethodInterface
 {
     /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
      * Array with all recipients in the following format:
      *  array( 'name' => 'Name 1', 'email' => '' ),
      *  array( 'name' => 'Name 1', 'email' => '' )
@@ -86,6 +91,26 @@ class Email implements ApiMethodInterface
     public function __construct()
     {
         $this->emailCollection = [];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
