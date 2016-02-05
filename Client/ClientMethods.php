@@ -11,6 +11,8 @@
 
 namespace Arrogance\MailrelayBundle\Client;
 
+use Arrogance\MailrelayBundle\Campaign\Campaign;
+use Arrogance\MailrelayBundle\Campaign\CampaignFolder;
 use Arrogance\MailrelayBundle\Connection\Connection;
 use Arrogance\MailrelayBundle\Email\Email;
 
@@ -69,7 +71,7 @@ abstract class ClientMethods
      * @param string $date Date in the following format: YYYY-MM-DD
      * @param array  $options
      *
-     * @return mixed
+     * @return object The response
      */
     public function getDeliveryErrors($date, array $options = [])
     {
@@ -82,7 +84,7 @@ abstract class ClientMethods
      * @param string $date Date in the following format: YYYY-MM-DD
      * @param array $options
      *
-     * @return mixed
+     * @return object The response
      */
     public function getDayLog($date, array $options = [])
     {
@@ -95,11 +97,102 @@ abstract class ClientMethods
      * @param string $email Recipient email
      * @param string $date Date in the following format: YYYY-MM-DD
      *
-     * @return mixed
+     * @return object The response
      */
     public function getMailRcptNumber($email, $date)
     {
         return $this->connection->get('getMailRcptNumber', [ 'email'  => $email, 'date' => $date ]);
+    }
+
+    /**
+     * Get list of packages.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getPackages(array $options = [])
+    {
+        return $this->connection->get('getPackages', $options);
+    }
+
+    /**
+     * Get a list of campaigns.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getCampaigns(array $options = [])
+    {
+        return $this->connection->get('getCampaigns', $options);
+    }
+
+    /**
+     * Add new campaign.
+     *
+     * @param Campaign $campaign
+     *
+     * @return object The response
+     */
+    public function addCampaign(Campaign $campaign)
+    {
+        return $this->connection->get('addCampaign', $campaign->toArray());
+    }
+
+    /**
+     * Get a list of campaign folders.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getCampaignFolders(array $options = [])
+    {
+        return $this->connection->get('getCampaignFolders', $options);
+    }
+
+    /**
+     * Add a campaign folder to our account.
+     *
+     * @param CampaignFolder $campaignFolder
+     *
+     * @return object The response
+     */
+    public function addCampaignFolder(CampaignFolder $campaignFolder)
+    {
+        return $this->connection->get('addCampaignFolder', $campaignFolder->toArray());
+    }
+
+    /**
+     * Update campaign folder using its id.
+     *
+     * @param integer      $id
+     * @param string       $name
+     * @param null|integer $parentId
+     *
+     * @return object The response
+     */
+    public function updateCampaignFolder($id, $name, $parentId = null)
+    {
+        $options = [ 'id'  => $id, 'name' => $name ];
+        if($parentId) {
+            $options['parentId'] = $parentId;
+        }
+
+        return $this->connection->get('updateCampaignFolder', $options);
+    }
+
+    /**
+     * Delete campaign folder using its id.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function deleteCampaignFolder($id)
+    {
+        return $this->connection->get('deleteCampaignFolder', [ 'id' => $id ]);
     }
 
     /**
@@ -113,19 +206,9 @@ abstract class ClientMethods
     }
 
     /**
-     * @param array $options
-     *
-     * @return object The response
-     */
-    public function getPackages(array $options = [])
-    {
-        return $this->connection->get('getPackages', $options);
-    }
-
-    /**
      * @param Email $email
      *
-     * @return mixed
+     * @return object The response
      */
     public function sendMail(Email $email)
     {
