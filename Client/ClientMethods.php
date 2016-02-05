@@ -126,7 +126,16 @@ abstract class ClientMethods
      */
     public function getCampaigns(array $options = [])
     {
-        return $this->connection->get('getCampaigns', $options);
+        $response = $this->connection->get('getCampaigns', $options);
+
+        $results = [];
+        foreach($response->data as $object) {
+            if($object) {
+                $results[] = $this->objectToCampaign($object);
+            }
+        }
+
+        return $results;
     }
 
     /**
@@ -142,15 +151,103 @@ abstract class ClientMethods
     }
 
     /**
+     * Update campaign.
+     *
+     * @param Campaign $campaign
+     *
+     * @return object The response
+     */
+    public function updateCampaign(Campaign $campaign)
+    {
+        return $this->connection->get('updateCampaign', $campaign->toArray());
+    }
+
+    /**
+     * Delete campaign using its id.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function deleteCampaign($id)
+    {
+        return $this->connection->get('deleteCampaign', [ 'id' => $id ]);
+    }
+
+    /**
+     * This function allows you to send a campaign to the groups that are assigned to them.
+     * It will return an mailing list object. You can use this object to control mailing list with its respective
+     * functions like and or get statistics.
+     *
+     * @param integer $id
+     * @param array   $options
+     *
+     * @return object The response
+     */
+    public function sendCampaign($id, array $options = [])
+    {
+        return $this->connection->get('sendCampaign', array_merge([ 'id' => $id ], $options));
+    }
+
+    /**
+     * This function allows you to send a campaign to a test email. It is normally used to verify if the campaign
+     * content looks ok in email clients before sending it to customers.
+     *
+     * @param integer $id
+     * @param string  $email
+     *
+     * @return object The response
+     */
+    public function sendCampaignTest($id, $email)
+    {
+        return $this->connection->get('sendCampaignTest', [ 'id' => $id, 'email' => $email ]);
+    }
+
+    /**
+     * @param object $object
+     *
+     * @return Campaign
+     */
+    protected function objectToCampaign($object)
+    {
+        $campaignFolder = new Campaign();
+        return $campaignFolder->setId($object->id)
+            ->setSubject($object->subject)
+            ->setFromId($object->mailbox_from_id)
+            ->setReplyId($object->mailbox_reply_id)
+            ->setReportId($object->mailbox_report_id)
+            ->setGroups($object->groups)
+            ->setAttachments(unserialize($object->attachs))
+            ->setDate(new \DateTime($object->date))
+            ->setCreated(new \DateTime($object->created))
+            ->setLastSent(new \DateTime($object->last_sent))
+            ->setDeleted((boolean) $object->deleted)
+            ->setSendDate(new \DateTime($object->send_date))
+            ->setSubscribersTotal($object->subscribers_total)
+            ->setPackageId($object->package_id)
+            ->setCampaignFolderId($object->id_campaign_folder)
+            ->setAnalyticsUtmCampaign($object->analytics_utm_campaign);
+    }
+
+    /**
      * Get a list of campaign folders.
      *
      * @param array $options
      *
-     * @return object The response
+     * @return array
      */
     public function getCampaignFolders(array $options = [])
     {
-        return $this->connection->get('getCampaignFolders', $options);
+        $response = $this->connection->get('getCampaignFolders', $options);
+
+        $results = [];
+        foreach($response->data as $object) {
+            if($object) {
+                $results[] = $this->objectToCampaignFolder($object);
+            }
+        }
+
+        return $results;
     }
 
     /**
@@ -168,20 +265,13 @@ abstract class ClientMethods
     /**
      * Update campaign folder using its id.
      *
-     * @param integer      $id
-     * @param string       $name
-     * @param null|integer $parentId
+     * @param CampaignFolder $campaignFolder
      *
      * @return object The response
      */
-    public function updateCampaignFolder($id, $name, $parentId = null)
+    public function updateCampaignFolder(CampaignFolder $campaignFolder)
     {
-        $options = [ 'id'  => $id, 'name' => $name ];
-        if($parentId) {
-            $options['parentId'] = $parentId;
-        }
-
-        return $this->connection->get('updateCampaignFolder', $options);
+        return $this->connection->get('updateCampaignFolder', $campaignFolder->toArray());
     }
 
     /**
@@ -197,15 +287,37 @@ abstract class ClientMethods
     }
 
     /**
+     * @param object $object
+     *
+     * @return CampaignFolder
+     */
+    protected function objectToCampaignFolder($object)
+    {
+        $campaignFolder = new CampaignFolder();
+        return $campaignFolder->setId($object->id)
+            ->setName($object->name)
+            ->setParentId($object->parent_id);
+    }
+
+    /**
      * Get list of groups.
      *
      * @param array $options
      *
-     * @return object The response
+     * @return array
      */
     public function getGroups(array $options = [])
     {
-        return $this->connection->get('getGroups', $options);
+        $response = $this->connection->get('getGroups', $options);
+
+        $results = [];
+        foreach($response->data as $object) {
+            if($object) {
+                $results[] = $this->objectToGroup($object);
+            }
+        }
+
+        return $results;
     }
 
     /**
@@ -218,6 +330,45 @@ abstract class ClientMethods
     public function addGroup(Group $group)
     {
         return $this->connection->get('addGroup', $group->toArray());
+    }
+
+    /**
+     * Update a existing group.
+     *
+     * @param Group $group
+     *
+     * @return mixed
+     */
+    public function updateGroup(Group $group)
+    {
+        return $this->connection->get('updateGroup', $group->toArray());
+    }
+
+    /**
+     * Delete group using its id.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function deleteGroup($id)
+    {
+        return $this->connection->get('removeGroup', [ 'id' => $id ]);
+    }
+
+    /**
+     * @param object $object
+     *
+     * @return Group
+     */
+    protected function objectToGroup($object)
+    {
+        $group = new Group();
+        return $group->setId($object->id)
+            ->setName($object->name)
+            ->setDescription($object->description)
+            ->setEnable((boolean) $object->enable)
+            ->setVisible((boolean) $object->visible);
     }
 
     /**
