@@ -40,22 +40,9 @@ class Client extends ClientMethods
     public function __construct($apiKey, $access_point, $mailrelay_api)
     {
         $this->apiKey = $apiKey;
-        $this->setAccessPoint($access_point, $mailrelay_api);
-
-        $this->connection = new Connection($this);
-    }
-
-    /**
-     * @param string $access_point
-     * @param string $mailrelay_api
-     *
-     * @return $this
-     */
-    protected function setAccessPoint($access_point, $mailrelay_api)
-    {
         $this->accessPoint = preg_replace("/__access_point__/i", $access_point, $mailrelay_api);
 
-        return $this;
+        $this->connection = new Connection($this);
     }
 
     /**
@@ -72,13 +59,5 @@ class Client extends ClientMethods
     public function getApiKey()
     {
         return $this->apiKey;
-    }
-
-    /**
-     * @return Connection
-     */
-    public function getConnection()
-    {
-        return $this->connection;
     }
 }
