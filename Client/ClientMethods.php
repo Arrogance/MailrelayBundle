@@ -32,18 +32,6 @@ abstract class ClientMethods
     protected $connection;
 
     /**
-     * Set the return data type for several api functions.
-     *
-     * @param string $type Options: array, csv, xml, json.
-     *
-     * @return mixed
-     */
-    public function setReturnType($type)
-    {
-        return $this->connection->get('setReturnType', [ 'returnType' => $type ]);
-    }
-
-    /**
      * Get a list of smtp tags.
      *
      * @param array $options
