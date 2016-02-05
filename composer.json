@@ -1,0 +1,22 @@
+{
+    "name": "arrogance/mailrelay-bundle",
+    "description": "A bundle to send, track and manage emails sent with Mailrelay.com",
+    "keywords": ["symfony2", "mailrelay", "smtp", "bundle"],
+    "homepage": "https://github.com/Arrogance/MailrelayBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Manuel Raya",
+            "email": "manuel@arrogance.es",
+            "homepage": "http://www.arrogance.es",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-4": { "Arrogance\\MailrelayBundle\\": "" }
+    }
+}
