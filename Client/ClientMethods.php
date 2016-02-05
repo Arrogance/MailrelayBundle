@@ -16,6 +16,7 @@ use Arrogance\MailrelayBundle\Campaign\CampaignFolder;
 use Arrogance\MailrelayBundle\Connection\Connection;
 use Arrogance\MailrelayBundle\Email\Email;
 use Arrogance\MailrelayBundle\Group\Group;
+use Arrogance\MailrelayBundle\MailingList\MailingList;
 
 /**
  * Class ClientMethods
@@ -176,7 +177,7 @@ abstract class ClientMethods
 
     /**
      * This function allows you to send a campaign to the groups that are assigned to them.
-     * It will return an mailing list object. You can use this object to control mailing list with its respective
+     * It will return an mailing list id. You can use this id to control mailing list with its respective
      * functions like and or get statistics.
      *
      * @param integer $id
@@ -227,6 +228,99 @@ abstract class ClientMethods
             ->setPackageId($object->package_id)
             ->setCampaignFolderId($object->id_campaign_folder)
             ->setAnalyticsUtmCampaign($object->analytics_utm_campaign);
+    }
+
+    /**
+     * Get a list of mailing lists.
+     *
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getMailingLists(array $options = [])
+    {
+        $response = $this->connection->get('getMailingLists', $options);
+
+        $results = [];
+        foreach($response->data as $object) {
+            if($object) {
+                $results[] = $this->objectToMailingList($object);
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * Cancel mailing list using its id. Note that once cancelled you cannot resume the mailing list.
+     *
+     * @param integer $id
+     *
+     * @return object The response
+     */
+    public function cancelMailingList($id)
+    {
+        return $this->connection->get('cancelMailingList', [ 'id' => $id ]);
+    }
+
+    /**
+     * Pause mailing list using its id. You can resume it later using resumeMailingList function.
+     *
+     * @param integer $id
+     *
+     * @return object The response
+     */
+    public function pauseMailingList($id)
+    {
+        return $this->connection->get('pauseMailingList', [ 'id' => $id ]);
+    }
+
+    /**
+     * Resume mailing list using its id. Mailing lists are only resumed if their current status is paused.
+     *
+     * @param integer $id
+     *
+     * @return object The response
+     */
+    public function resumeMailingList($id)
+    {
+        return $this->connection->get('resumeMailingList', [ 'id' => $id ]);
+    }
+
+    /**
+     * @param $object
+     *
+     * @return MailingList
+     */
+    protected function objectToMailingList($object)
+    {
+        $mailingList = new MailingList();
+        return $mailingList->setId($object->id)
+            ->setSubject($object->subject)
+            ->setFromId($object->mailbox_from_id)
+            ->setReplyId($object->mailbox_reply_id)
+            ->setReportId($object->mailbox_report_id)
+            ->setGroups($object->groups)
+            ->setText($object->text)
+            ->setHtml($object->html)
+            ->setAttachments(unserialize($object->attachs))
+            ->setDate(new \DateTime($object->date))
+            ->setCreated(new \DateTime($object->created))
+            ->setLastSent(new \DateTime($object->last_sent))
+            ->setDeleted((boolean) $object->deleted)
+            ->setSendDate(new \DateTime($object->send_date))
+            ->setSubscribersTotal($object->subscribers_total)
+            ->setPackageId($object->package_id)
+            ->setAnalyticsUtmCampaign($object->analytics_utm_campaign)
+            ->setStatus($object->status)
+            ->setAdminId($object->admin_id)
+            ->setSpam($object->is_spam)
+            ->setSpamReport($object->spam_report)
+            ->setAuthToken($object->auth_token)
+            ->setSent($object->sent)
+            ->setBounced($object->bounced)
+            ->setCampaignId($object->campaign_id)
+            ->setMailingListFolderId($object->id_mailing_list_folder);
     }
 
     /**
