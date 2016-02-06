@@ -194,7 +194,7 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function getFromId()
     {
-        return $this->fromId;
+        return (integer) $this->fromId;
     }
 
     /**
@@ -214,7 +214,7 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function getReplyId()
     {
-        return $this->replyId;
+        return (integer) $this->replyId;
     }
 
     /**
@@ -234,7 +234,7 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function getReportId()
     {
-        return $this->reportId;
+        return (integer) $this->reportId;
     }
 
     /**
@@ -254,7 +254,7 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function getPackageId()
     {
-        return $this->packageId;
+        return (integer) $this->packageId;
     }
 
     /**
