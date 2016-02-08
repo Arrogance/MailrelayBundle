@@ -27,8 +27,9 @@ class EmailTest extends WebTestCase
         $email = new Email();
         $email->addEmail('Test Email', 'test@test.io');
 
-        $this->assertContains('test@test.io', $email->getEmails()[0]);
-        $this->assertContains('Test Email', $email->getEmails()[0]);
+        $emailsCollection = $email->getEmails();
+        $this->assertContains('test@test.io', $emailsCollection[0]);
+        $this->assertContains('Test Email', $emailsCollection[0]);
     }
 
     public function testPackageIdIsInteger()
