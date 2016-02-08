@@ -20,10 +20,5 @@
     },
     "autoload": {
         "psr-4": { "Arrogance\\MailrelayBundle\\": "" }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "^1.0-dev"
-        }
     }
 }
