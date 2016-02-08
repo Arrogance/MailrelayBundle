@@ -10,7 +10,7 @@ _Attention: This bundle is under a high development, wiki and instructions ***ma
 ## How to Install
 Use composer to install the bundle:
 ```bash
-$ composer require arrogance/mailrelay-bundle ^1.0
+$ composer require arrogance/mailrelay-bundle dev-master
 ```
 
 Load the bundle in `AppKernel.php`:
