@@ -90,7 +90,7 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function __construct()
     {
-        $this->emailCollection = [];
+        $this->emailCollection = array();
     }
 
     /**

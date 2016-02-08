@@ -117,7 +117,7 @@ abstract class ClientMethods
     {
         $response = $this->connection->get('getCampaigns', $options);
 
-        $results = [];
+        $results = array();
         foreach($response->data as $object) {
             if($object) {
                 $results[] = $this->objectToCampaign($object);
@@ -229,7 +229,7 @@ abstract class ClientMethods
     {
         $response = $this->connection->get('getMailingLists', $options);
 
-        $results = [];
+        $results = array();
         foreach($response->data as $object) {
             if($object) {
                 $results[] = $this->objectToMailingList($object);
@@ -322,7 +322,7 @@ abstract class ClientMethods
     {
         $response = $this->connection->get('getCampaignFolders', $options);
 
-        $results = [];
+        $results = array();
         foreach($response->data as $object) {
             if($object) {
                 $results[] = $this->objectToCampaignFolder($object);
@@ -392,7 +392,7 @@ abstract class ClientMethods
     {
         $response = $this->connection->get('getGroups', $options);
 
-        $results = [];
+        $results = array();
         foreach($response->data as $object) {
             if($object) {
                 $results[] = $this->objectToGroup($object);
