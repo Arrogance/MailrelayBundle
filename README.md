@@ -1,16 +1,12 @@
-# MailrelayBundle - 1.0@dev
+# MailrelayBundle - 1.0@dev - [![Build Status](https://travis-ci.org/Arrogance/MailrelayBundle.svg?branch=master)](https://travis-ci.org/Arrogance/MailrelayBundle) [![Packagist](https://img.shields.io/packagist/dt/Arrogance/mailrelay-bundle.svg)]() [![Packagist](https://img.shields.io/packagist/v/Arrogance/mailrelay-bundle.svg)]()
 A bundle to send, track and manage emails sent with Mailrelay.com.
-
-[![Build Status](https://travis-ci.org/Arrogance/MailrelayBundle.svg?branch=master)](https://travis-ci.org/Arrogance/MailrelayBundle)
-[![Packagist](https://img.shields.io/packagist/dt/Arrogance/mailrelay-bundle.svg)]()
-[![Packagist](https://img.shields.io/packagist/v/Arrogance/mailrelay-bundle.svg)]()
 
 _Attention: This bundle is under a high development, wiki and instructions ***may be*** incomplete or inexistent yet. Use it under your very own discretion and responsibility._
 
 ## How to Install
 Use composer to install the bundle:
 ```bash
-$ composer require arrogance/mailrelay-bundle dev-master
+$ composer require arrogance/mailrelay-bundle ^1.0
 ```
 
 Load the bundle in `AppKernel.php`:
@@ -54,30 +50,7 @@ $email->addEmail('Your recipìent', 'test@test.io')
 // Mailrelay response
 $response = $client->sendMail($email);
 ```
-
-#### Send Campaign
-```php
-use Arrogance\MailrelayBundle\Campaign;
-// ...
-$client = $this->get('arrogance_mailrelay.client');
-
-$campaign = new Campaign\Campaign();
-$campaign->addEmail('Your recipìent', 'test@test.io')
-    ->addEmail('Another recipient', 'another@test.io')
-    ->setSubject('Email de prueba desde la API')
-    ->setHtml($this->get('twig')->render('@YourBundle/Default/email.html.twig', array()))
-    ->setText('Plain text version available')
-    ->addGroup(1)
-    ->setFromId(1)
-    ->setReplyId(1)
-    ->setReportId(1)
-    ->setPackageId(6)
-    ->setCampaignFolderId(1);
-
-// Mailrelay response
-$response = $client->addCampaign($campaign);
-$client->sendCampaign($response->data);
-```
+### [View full documentation](https://github.com/Arrogance/MailrelayBundle/wiki/Documentation)
 
 ## License
 The MIT License (MIT)
