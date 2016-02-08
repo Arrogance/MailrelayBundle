@@ -121,10 +121,10 @@ abstract class EmailBase implements ApiMethodInterface
      */
     public function addEmail($name, $email)
     {
-        $this->emailCollection[] = [
+        $this->emailCollection[] = array(
             'name' => $name,
             'email' => $email
-        ];
+        );
 
         return $this;
     }

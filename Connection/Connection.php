@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface
         $this->client = $client;
     }
 
-    public function get($apiMethod, array $config = [])
+    public function get($apiMethod, array $config = array())
     {
         $postData = [
             'function' => $apiMethod,

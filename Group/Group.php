@@ -184,12 +184,12 @@ class Group implements ApiMethodInterface
      */
     public function toArray()
     {
-        return [
+        return array(
             'name' => $this->name,
             'description' => $this->description,
             'position' => $this->position,
             'enable' => $this->enable,
             'visible' => $this->visible
-        ];
+        );
     }
 }

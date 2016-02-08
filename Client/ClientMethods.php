@@ -38,7 +38,7 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getSmtpTags(array $options = [])
+    public function getSmtpTags(array $options = array())
     {
         return $this->connection->get('getSmtpTags', $options);
     }
@@ -50,7 +50,7 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getSends(array $options = [])
+    public function getSends(array $options = array())
     {
         return $this->connection->get('getSends', $options);
     }
@@ -63,9 +63,9 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getDeliveryErrors($date, array $options = [])
+    public function getDeliveryErrors($date, array $options = array())
     {
-        return $this->connection->get('getDeliveryErrors', array_merge([ 'date' => $date ], $options));
+        return $this->connection->get('getDeliveryErrors', array_merge(array('date' => $date), $options));
     }
 
     /**
@@ -76,9 +76,9 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getDayLog($date, array $options = [])
+    public function getDayLog($date, array $options = array())
     {
-        return $this->connection->get('getDayLog', array_merge([ 'date' => $date ], $options));
+        return $this->connection->get('getDayLog', array_merge(array('date' => $date), $options));
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class ClientMethods
      */
     public function getMailRcptNumber($email, $date)
     {
-        return $this->connection->get('getMailRcptNumber', [ 'email'  => $email, 'date' => $date ]);
+        return $this->connection->get('getMailRcptNumber', array('email' => $email, 'date' => $date));
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getPackages(array $options = [])
+    public function getPackages(array $options = array())
     {
         return $this->connection->get('getPackages', $options);
     }
@@ -113,7 +113,7 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getCampaigns(array $options = [])
+    public function getCampaigns(array $options = array())
     {
         $response = $this->connection->get('getCampaigns', $options);
 
@@ -160,7 +160,7 @@ abstract class ClientMethods
      */
     public function deleteCampaign($id)
     {
-        return $this->connection->get('deleteCampaign', [ 'id' => $id ]);
+        return $this->connection->get('deleteCampaign', array('id' => $id));
     }
 
     /**
@@ -173,9 +173,9 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function sendCampaign($id, array $options = [])
+    public function sendCampaign($id, array $options = array())
     {
-        return $this->connection->get('sendCampaign', array_merge([ 'id' => $id ], $options));
+        return $this->connection->get('sendCampaign', array_merge(array('id' => $id), $options));
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class ClientMethods
      */
     public function sendCampaignTest($id, $email)
     {
-        return $this->connection->get('sendCampaignTest', [ 'id' => $id, 'email' => $email ]);
+        return $this->connection->get('sendCampaignTest', array('id' => $id, 'email' => $email));
     }
 
     /**
@@ -225,7 +225,7 @@ abstract class ClientMethods
      *
      * @return array
      */
-    public function getMailingLists(array $options = [])
+    public function getMailingLists(array $options = array())
     {
         $response = $this->connection->get('getMailingLists', $options);
 
@@ -248,7 +248,7 @@ abstract class ClientMethods
      */
     public function cancelMailingList($id)
     {
-        return $this->connection->get('cancelMailingList', [ 'id' => $id ]);
+        return $this->connection->get('cancelMailingList', array('id' => $id));
     }
 
     /**
@@ -260,7 +260,7 @@ abstract class ClientMethods
      */
     public function pauseMailingList($id)
     {
-        return $this->connection->get('pauseMailingList', [ 'id' => $id ]);
+        return $this->connection->get('pauseMailingList', array('id' => $id));
     }
 
     /**
@@ -272,7 +272,7 @@ abstract class ClientMethods
      */
     public function resumeMailingList($id)
     {
-        return $this->connection->get('resumeMailingList', [ 'id' => $id ]);
+        return $this->connection->get('resumeMailingList', array('id' => $id));
     }
 
     /**
@@ -318,7 +318,7 @@ abstract class ClientMethods
      *
      * @return array
      */
-    public function getCampaignFolders(array $options = [])
+    public function getCampaignFolders(array $options = array())
     {
         $response = $this->connection->get('getCampaignFolders', $options);
 
@@ -365,7 +365,7 @@ abstract class ClientMethods
      */
     public function deleteCampaignFolder($id)
     {
-        return $this->connection->get('deleteCampaignFolder', [ 'id' => $id ]);
+        return $this->connection->get('deleteCampaignFolder', array('id' => $id));
     }
 
     /**
@@ -388,7 +388,7 @@ abstract class ClientMethods
      *
      * @return array
      */
-    public function getGroups(array $options = [])
+    public function getGroups(array $options = array())
     {
         $response = $this->connection->get('getGroups', $options);
 
@@ -435,7 +435,7 @@ abstract class ClientMethods
      */
     public function deleteGroup($id)
     {
-        return $this->connection->get('removeGroup', [ 'id' => $id ]);
+        return $this->connection->get('removeGroup', array('id' => $id));
     }
 
     /**
@@ -458,7 +458,7 @@ abstract class ClientMethods
      *
      * @return object The response
      */
-    public function getMailboxes(array $options = [])
+    public function getMailboxes(array $options = array())
     {
         return $this->connection->get('getMailboxes', $options);
     }

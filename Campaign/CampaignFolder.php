@@ -108,9 +108,9 @@ class CampaignFolder implements ApiMethodInterface
      */
     public function toArray()
     {
-        return [
+        return array(
             'name' => $this->name,
             'parentId' => $this->parentId
-        ];
+        );
     }
 }

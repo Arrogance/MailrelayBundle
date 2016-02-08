@@ -334,7 +334,7 @@ class Campaign extends EmailBase
      */
     public function toArray()
     {
-        $array = [
+        $array = array(
             'emails' => $this->emailCollection,
             'subject' => $this->subject,
             'html' => $this->html,
@@ -344,14 +344,14 @@ class Campaign extends EmailBase
             'packageId' => $this->packageId,
             'groups' => $this->groups,
             'urlToken' => $this->urlToken
-        ];
+        );
 
-        $optional = [
+        $optional = array(
             'attachments' => $this->attachments,
             'text' => $this->text,
             'campaignFolderId' => $this->campaignFolderId,
             'analyticsUtmCampaign' => $this->analyticsUtmCampaign
-        ];
+        );
 
         foreach($optional as $name => $value) {
             if($value) {

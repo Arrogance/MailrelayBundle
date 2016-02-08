@@ -25,7 +25,7 @@ class Email extends EmailBase
      */
     public function toArray()
     {
-        $array = [
+        $array = array(
             'emails' => $this->emailCollection,
             'subject' => $this->subject,
             'html' => $this->html,
@@ -33,7 +33,7 @@ class Email extends EmailBase
             'mailboxReplyId' => $this->replyId,
             'mailboxReportId' => $this->reportId,
             'packageId' => $this->packageId
-        ];
+        );
 
         if($this->attachments) {
             $array['attachments'] = $this->attachments;
