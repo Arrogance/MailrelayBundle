@@ -53,7 +53,9 @@ abstract class ClientMethods
      */
     public function getSends(array $options = array())
     {
-        return $this->connection->get('getSends', $options);
+        $response = $this->connection->get('getSends', $options);
+
+        return $response->data;
     }
 
     /**
