@@ -3,7 +3,7 @@ A bundle to send, track and manage emails sent with Mailrelay.com
 
 [![Build Status](https://travis-ci.org/Arrogance/MailrelayBundle.svg?branch=master)](https://travis-ci.org/Arrogance/MailrelayBundle)
 
-### Current Version 0.0.1a
+### Current Version 0.0.2a
 
 ## License
 The MIT License (MIT)
