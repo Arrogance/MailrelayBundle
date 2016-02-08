@@ -17,6 +17,7 @@ use Arrogance\MailrelayBundle\Connection\Connection;
 use Arrogance\MailrelayBundle\Email\Email;
 use Arrogance\MailrelayBundle\Group\Group;
 use Arrogance\MailrelayBundle\MailingList\MailingList;
+use Arrogance\MailrelayBundle\Subscriber\Subscriber;
 
 /**
  * Class ClientMethods
@@ -131,12 +132,20 @@ abstract class ClientMethods
      * Add new campaign.
      *
      * @param Campaign $campaign
+     * @param bool     $returnObject
      *
-     * @return object The response
+     * @return mixed|object
      */
-    public function addCampaign(Campaign $campaign)
+    public function addCampaign(Campaign $campaign, $returnObject = false)
     {
-        return $this->connection->get('addCampaign', $campaign->toArray());
+        $response = $this->connection->get('addCampaign', $campaign->toArray());
+
+        if($returnObject == true) {
+            $result = $this->getCampaigns(array('id' => $response->data));
+            return $result[0];
+        }
+
+        return $response;
     }
 
     /**
@@ -406,12 +415,20 @@ abstract class ClientMethods
      * Add a new group.
      *
      * @param Group $group
+     * @param bool  $returnObject
      *
-     * @return object The response
+     * @return mixed
      */
-    public function addGroup(Group $group)
+    public function addGroup(Group $group, $returnObject = false)
     {
-        return $this->connection->get('addGroup', $group->toArray());
+        $response = $this->connection->get('addGroup', $group->toArray());
+
+        if($returnObject == true) {
+            $result = $this->getGroups(array('id' => $response->data));
+            return $result[0];
+        }
+
+        return $response;
     }
 
     /**
@@ -451,6 +468,91 @@ abstract class ClientMethods
             ->setDescription($object->description)
             ->setEnable((boolean) $object->enable)
             ->setVisible((boolean) $object->visible);
+    }
+
+    /**
+     * Get a list of subscribers.
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getSubscribers(array $options = array())
+    {
+        return $this->connection->get('getSubscribers', $options);
+    }
+
+    /**
+     * Add a new subscriber.
+     *
+     * @param Subscriber $subscriber
+     * @param bool       $returnObject
+     *
+     * @return mixed
+     */
+    public function addSubscriber(Subscriber $subscriber, $returnObject = false)
+    {
+        $response = $this->connection->get('addSubscriber', $subscriber->toArray());
+
+        if($returnObject == true) {
+            $result = $this->getCampaigns(array('id' => $response->data));
+            return $result[0];
+        }
+
+        return $response;
+    }
+
+    /**
+     * Update subscriber data.
+     *
+     * @param Subscriber $subscriber
+     *
+     * @return mixed
+     */
+    public function updateSubscriber(Subscriber $subscriber)
+    {
+        return $this->connection->get('updateSubscriber', $subscriber->toArray());
+    }
+
+    /**
+     * @param array $ids
+     * @param bool  $activated
+     *
+     * @return mixed
+     */
+    public function updateSubscribers(array $ids, $activated = true)
+    {
+        return $this->connection->get('updateSubscribers', array(
+            'ids' => $ids,
+            'status' => $activated ? 1 : 0
+        ));
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return mixed
+     */
+    public function deleteSubscriber($email)
+    {
+        return $this->connection->get('deleteSubscriber', array('email' => $email));
+    }
+
+    /**
+     * Assign multiple subscribers to one or more groups. If the subscriber already exists, the new groups will be
+     * merged with the current ones.
+     *
+     * @param array $groups
+     * @param array $emails
+     *
+     * @return mixed
+     */
+    public function assignSubscribersToGroups(array $groups, array $emails)
+    {
+        return $this->connection->get('assignSubscribersToGroups', array(
+            'groups' => $groups,
+            'emails' => $emails
+        ));
     }
 
     /**
