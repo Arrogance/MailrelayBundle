@@ -31,10 +31,12 @@ class EmailTest extends WebTestCase
         $this->assertContains('Test Email', $email->getEmails()[0]);
     }
 
-    public function testToArray()
+    public function testPackageIdIsInteger()
     {
         $email = new Email();
+        $email->setReplyId(10);
 
-        $this->assertCount(0, $email->toArray()['attachments']);
+        $this->assertEquals($email->getReplyId(), 10);
+        $this->assertInternalType('integer', $email->getReplyId());
     }
 }
