@@ -4,6 +4,7 @@
     "keywords": ["symfony2", "mailrelay", "smtp", "bundle"],
     "homepage": "https://github.com/Arrogance/MailrelayBundle",
     "license": "MIT",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Manuel Raya",
@@ -22,7 +23,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.0.2-dev"
+            "dev-master": "^1.0@dev"
         }
     }
 }
