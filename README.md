@@ -37,10 +37,12 @@ arrogance_mailrelay:
 ## Quick Start
 #### Send Email
 ```php
+use Arrogance\MailrelayBundle\Email;
+// ...
 $client = $this->get('arrogance_mailrelay.client');
 
-$email = new Arrogance\MailrelayBundle\Email\Email();
-$email->addEmail('Your recipìent', 'test@test.io'
+$email = new Email\Email();
+$email->addEmail('Your recipìent', 'test@test.io')
     ->addEmail('Another recipient', 'another@test.io')
     ->setSubject('Email de prueba desde la API')
     ->setHtml($this->get('twig')->render('@YourBundle/Default/email.html.twig', array()))
@@ -55,19 +57,22 @@ $response = $client->sendMail($email);
 
 #### Send Campaign
 ```php
+use Arrogance\MailrelayBundle\Campaign;
+// ...
 $client = $this->get('arrogance_mailrelay.client');
 
-$campaign = new Arrogance\MailrelayBundle\Campaign\Campaign();
-$campaign->addEmail('Your recipìent', 'test@test.io'
+$campaign = new Campaign\Campaign();
+$campaign->addEmail('Your recipìent', 'test@test.io')
     ->addEmail('Another recipient', 'another@test.io')
     ->setSubject('Email de prueba desde la API')
     ->setHtml($this->get('twig')->render('@YourBundle/Default/email.html.twig', array()))
     ->setText('Plain text version available')
+    ->addGroup(1)
     ->setFromId(1)
     ->setReplyId(1)
     ->setReportId(1)
     ->setPackageId(6)
-    ->setCampaignFolder(1);
+    ->setCampaignFolderId(1);
 
 // Mailrelay response
 $response = $client->addCampaign($campaign);
