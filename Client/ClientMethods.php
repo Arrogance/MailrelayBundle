@@ -179,12 +179,20 @@ abstract class ClientMethods
      *
      * @param integer $id
      * @param array   $options
+     * @param bool    $returnObject
      *
-     * @return object The response
+     * @return mixed
      */
-    public function sendCampaign($id, array $options = array())
+    public function sendCampaign($id, array $options = array(), $returnObject = true)
     {
-        return $this->connection->get('sendCampaign', array_merge(array('id' => $id), $options));
+        $response = $this->connection->get('sendCampaign', array_merge(array('id' => $id), $options));
+
+        if($returnObject == true) {
+            $result = $this->getMailingLists(array('id' => $response->data));
+            return $result[0];
+        }
+
+        return $response;
     }
 
     /**
