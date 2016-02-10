@@ -185,7 +185,7 @@ abstract class ClientMethods
      *
      * @return mixed
      */
-    public function sendCampaign($id, array $options = array(), $returnObject = true)
+    public function sendCampaign($id, array $options = array(), $returnObject = false)
     {
         $response = $this->connection->get('sendCampaign', array_merge(array('id' => $id), $options));
 
