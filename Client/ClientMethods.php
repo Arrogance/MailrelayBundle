@@ -561,7 +561,7 @@ abstract class ClientMethods
     {
         return $this->connection->get('assignSubscribersToGroups', array(
             'groups' => $groups,
-            'emails' => $emails
+            'subscribers' => $emails
         ));
     }
 
