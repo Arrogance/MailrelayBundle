@@ -584,4 +584,46 @@ abstract class ClientMethods
     {
         return $this->connection->get('sendMail', $email->toArray());
     }
+
+    /**
+     * This function can be used to import subscribers with CSV files.
+     *
+     * @param string $content
+     * @param array  $groups
+     * @param array  $options
+     *
+     * @return object The response
+     */
+    public function import($content, array $groups, array $options = array())
+    {
+        return $this->connection->get('import', array_merge(array(
+            'fileContent' => $content,
+            'groups' => $groups
+        ), $options));
+    }
+
+    /**
+     * Get list of imports.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getImports(array $options = array())
+    {
+        return $this->connection->get('getImports', $options);
+    }
+
+    /**
+     * Get details about an import showing line by line results.
+     *
+     * @param integer $id
+     * @param array   $options
+     *
+     * @return object The response
+     */
+    public function getImportData($id, array $options = array())
+    {
+        return $this->connection->get('getImportData', array_merge(array('idFile' => $id), $options));
+    }
 }
