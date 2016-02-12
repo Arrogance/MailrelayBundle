@@ -626,4 +626,65 @@ abstract class ClientMethods
     {
         return $this->connection->get('getImportData', array_merge(array('idFile' => $id), $options));
     }
+
+    /**
+     * Get basic mailing list stats containing number of views, clicks, sent emails, bounced, spam reports and
+     * total subscribers.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getStats(array $options = array())
+    {
+        return $this->connection->get('getStats', $options);
+    }
+
+    /**
+     * Get detailed clicks info for mailing lists.
+     *
+     * @param array $options
+     *
+     * @return object The response
+     */
+    public function getClicksInfo(array $options = array())
+    {
+        return $this->connection->get('getClicksInfo', $options);
+    }
+
+    /**
+     * Get detailed unique clicks info for mailing lists.
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getUniqueClicksInfo(array $options = array())
+    {
+        return $this->connection->get('getUniqueClicksInfo', $options);
+    }
+
+    /**
+     * Get detailed impressions info for mailing lists.
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getImpressionsInfo(array $options = array())
+    {
+        return $this->connection->get('getImpressionsInfo', $options);
+    }
+
+    /**
+     * Get detailed unique impressions info for mailing lists.
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getUniqueImpressionsInfo(array $options = array())
+    {
+        return $this->connection->get('getUniqueImpressionsInfo', $options);
+    }
 }
