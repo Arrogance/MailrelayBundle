@@ -38,8 +38,8 @@ use Arrogance\MailrelayBundle\Email;
 $client = $this->get('arrogance_mailrelay.client');
 
 $email = new Email\Email();
-$email->addEmail('Your recipìent', 'test@test.io')
-    ->addEmail('Another recipient', 'another@test.io')
+$email->addEmail('test@test.io', 'Your recipìent')
+    ->addEmail('another@test.io')
     ->setSubject('Email de prueba desde la API')
     ->setHtml($this->get('twig')->render('@YourBundle/Default/email.html.twig', array()))
     ->setFromId(1)

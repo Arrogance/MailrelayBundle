@@ -21,6 +21,59 @@ namespace Arrogance\MailrelayBundle\Email;
 class Email extends EmailBase
 {
     /**
+     * Array with all recipients in the following format:
+     *  array( 'name' => 'Name 1', 'email' => '' ),
+     *  array( 'name' => 'Name 1', 'email' => '' )
+     *
+     * @var array
+     */
+    protected $emailCollection;
+
+    /**
+     * Email constructor.
+     */
+    public function __construct()
+    {
+        $this->emailCollection = array();
+    }
+
+    /**
+     * @param string $email
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function addEmail($email, $name = '')
+    {
+        $this->emailCollection[] = array(
+            'email' => $email,
+            'name' => $name
+        );
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEmails()
+    {
+        return $this->emailCollection;
+    }
+
+    /**
+     * @param array $emails
+     *
+     * @return Email
+     */
+    public function setEmails($emails)
+    {
+        $this->emailCollection = $emails;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()

@@ -92,7 +92,6 @@ class Campaign extends EmailBase
      */
     public function __construct()
     {
-        parent::__construct();
         $this->urlToken = false;
         $this->groups = array();
     }

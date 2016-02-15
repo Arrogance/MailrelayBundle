@@ -26,15 +26,6 @@ abstract class EmailBase implements ApiMethodInterface
     protected $id;
 
     /**
-     * Array with all recipients in the following format:
-     *  array( 'name' => 'Name 1', 'email' => '' ),
-     *  array( 'name' => 'Name 1', 'email' => '' )
-     *
-     * @var array
-     */
-    protected $emailCollection;
-
-    /**
      * Subject of the message.
      *
      * @var string
@@ -86,14 +77,6 @@ abstract class EmailBase implements ApiMethodInterface
     protected $attachments;
 
     /**
-     * Email constructor.
-     */
-    public function __construct()
-    {
-        $this->emailCollection = array();
-    }
-
-    /**
      * @return int
      */
     public function getId()
@@ -109,42 +92,6 @@ abstract class EmailBase implements ApiMethodInterface
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @param string $email
-     *
-     * @return $this
-     */
-    public function addEmail($name, $email)
-    {
-        $this->emailCollection[] = array(
-            'name' => $name,
-            'email' => $email
-        );
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getEmails()
-    {
-        return $this->emailCollection;
-    }
-
-    /**
-     * @param array $emails
-     *
-     * @return Email
-     */
-    public function setEmails($emails)
-    {
-        $this->emailCollection = $emails;
 
         return $this;
     }
