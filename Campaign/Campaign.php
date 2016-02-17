@@ -334,7 +334,6 @@ class Campaign extends EmailBase
     public function toArray()
     {
         $array = array(
-            'emails' => $this->emailCollection,
             'subject' => $this->subject,
             'html' => $this->html,
             'mailboxFromId' => $this->fromId,
